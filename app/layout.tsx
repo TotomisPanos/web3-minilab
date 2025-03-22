@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen bg-gray-100 text-gray-900">
         <header className="bg-white shadow-md">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="text-xl font-bold text-blue-600">Web3 MiniLab</div>
+            <div className="text-xl font-bold text-blue-600">Web3-MiniLab</div>
             <div className="md:hidden">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}

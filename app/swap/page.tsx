@@ -3,7 +3,7 @@ import React from 'react';
 const Swap = () => {
   return (
     <div>
-      {/* Swap component content goes here */}
+      <h1>Swap</h1>
     </div>
   );
 };
