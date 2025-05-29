@@ -8,10 +8,14 @@ export default function GasPriceInfo() {
 
   useEffect(() => {
     const fetchGasPrice = async () => {
-      const provider = new BrowserProvider(window.ethereum);
-      const feeData = await provider.getFeeData();
-      if (feeData.gasPrice) {
-        setGasPrice(formatUnits(feeData.gasPrice, 'gwei'));
+      if (typeof window !== 'undefined' && window.ethereum) {
+        const provider = new BrowserProvider(window.ethereum);
+        const feeData = await provider.getFeeData();
+        if (feeData.gasPrice) {
+          setGasPrice(formatUnits(feeData.gasPrice, 'gwei'));
+        }
+      } else {
+        setGasPrice(null);
       }
     };
     fetchGasPrice();

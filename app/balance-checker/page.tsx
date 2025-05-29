@@ -2,8 +2,15 @@
 
 import { useState } from 'react';
 import { ethers } from 'ethers';
+import type { MetaMaskInpageProvider } from '@metamask/providers';
 import TokenBalanceForm from '@/components/balance-checker/TokenBalanceForm';
 import TokenBalanceResult from '@/components/balance-checker/TokenBalanceResult';
+
+declare global {
+  interface Window {
+    ethereum?: MetaMaskInpageProvider;
+  }
+}
 
 const ERC20_ABI = [
   'function balanceOf(address owner) view returns (uint256)',
@@ -18,15 +25,18 @@ export default function BalanceCheckerPage() {
   
   const checkBalance = async (wallet: string, token: string) => {
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      if (!window.ethereum) {
+        throw new Error('MetaMask is not installed');
+      }
+      const provider = new ethers.BrowserProvider(window.ethereum as unknown as ethers.Eip1193Provider);
       const contract = new ethers.Contract(token, ERC20_ABI, provider);
-      
+
       const [rawBalance, decimals, sym] = await Promise.all([
         contract.balanceOf(wallet),
         contract.decimals(),
         contract.symbol(),
       ]);
-      
+
       const formatted = ethers.formatUnits(rawBalance, decimals);
       setBalance(formatted);
       setSymbol(sym);
