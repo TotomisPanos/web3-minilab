@@ -1,13 +1,17 @@
 'use client';
 
-declare global {
-  interface Window {
-    ethereum: any;
-  }
-}
 
 import { useState } from 'react';
 import { ethers } from 'ethers';
+import type { MetaMaskInpageProvider } from '@metamask/providers';
+
+declare global {
+  interface Window {
+    ethereum?: MetaMaskInpageProvider;
+  }
+}
+
+
 
 interface Props {
   onConnect: (provider: ethers.BrowserProvider, address: string) => void;

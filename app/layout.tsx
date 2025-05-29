@@ -6,11 +6,6 @@ import { useState } from 'react';
 import { ReactNode } from 'react';
 import { Menu, X } from 'lucide-react'; // uses lucide icons, can swap with Heroicons or others
 
-const metadata = {
-  title: 'EthKit',
-  description: 'Your Ethereum Utility Toolkit',
-};
-
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/wallet-dashboard', label: 'Wallet Dashboard' },

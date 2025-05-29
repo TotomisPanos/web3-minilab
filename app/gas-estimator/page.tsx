@@ -11,6 +11,9 @@ export default function GasEstimatorPage() {
   const [costEth, setCostEth] = useState('');
 
   const estimate = async (to: string, amountEth: string) => {
+    if (!window.ethereum) {
+      throw new Error('No Ethereum provider found. Please install MetaMask.');
+    }
     const provider = new BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     const value = parseUnits(amountEth, 'ether');
