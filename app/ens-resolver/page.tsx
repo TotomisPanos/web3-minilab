@@ -18,6 +18,10 @@ export default function ENSResolverPage() {
     setError(null);
 
     try {
+      if (!window.ethereum) {
+        setError('No Ethereum provider found. Please install MetaMask.');
+        return;
+      }
       const provider = new ethers.BrowserProvider(window.ethereum);
       const network = await provider.getNetwork();
       
